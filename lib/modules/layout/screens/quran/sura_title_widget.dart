@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/theme/app_theme.dart';
+import 'package:islami/modules/layout/screens/quran/quran_Screen.dart';
 
 class suratitlewidget extends StatelessWidget {
-  final Suradata data;
-
-  final String suraname;
-  final String suranumber;
+  final SuraData data;
 
   suratitlewidget(
       {super.key,
       required this.data,
-      required this.suraname,
-      required this.suranumber});
+    required String suraname,
+    required String suranumber,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +24,10 @@ class suratitlewidget extends StatelessWidget {
             style: theme.textTheme.bodyMedium,
           ),
         ),
-        const SizedBox(
+        SizedBox(
           height: 40,
           child: VerticalDivider(
-            color: AppTheme.lightPrimaryColor,
+            color: theme.dividerTheme.color,
             thickness: 3,
           ),
         ),
@@ -46,9 +43,3 @@ class suratitlewidget extends StatelessWidget {
   }
 }
 
-class Suradata {
-  final String suraname;
-  final String suranumber;
-
-  Suradata({required this.suraname, required this.suranumber});
-}

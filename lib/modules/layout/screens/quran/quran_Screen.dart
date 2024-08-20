@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:islami/core/theme/app_theme.dart';
 import 'package:islami/modules/layout/screens/quran/quran_details_view.dart';
 import 'package:islami/modules/layout/screens/quran/sura_title_widget.dart';
 
-class quranScreen extends StatelessWidget {
+class quranScreen extends StatefulWidget {
+  @override
+  State<quranScreen> createState() => _quranScreenState();
+}
+
+class _quranScreenState extends State<quranScreen> {
   List<String> suranamelist = [
     "الفاتحه",
     "البقرة",
@@ -120,6 +124,7 @@ class quranScreen extends StatelessWidget {
     "الفلق",
     "الناس"
   ];
+
   List<String> AyaNumberlist = [
     '7',
     '286',
@@ -248,16 +253,16 @@ class quranScreen extends StatelessWidget {
           width: 205,
         ),
       ),
-      const Divider(
+      Divider(
         thickness: 3,
-        color: Color(0xffB7935F),
+        color: theme.dividerTheme.color,
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
             child: Text(
-              'عدد الايات',
+              'رقم السورة',
               style: theme.textTheme.bodyLarge,
               textAlign: TextAlign.center,
             ),
@@ -265,7 +270,7 @@ class quranScreen extends StatelessWidget {
           SizedBox(
             height: 35,
             child: VerticalDivider(
-              color: AppTheme.lightPrimaryColor,
+              color: theme.dividerTheme.color,
               thickness: 3,
             ),
           ),
@@ -281,7 +286,7 @@ class quranScreen extends StatelessWidget {
       Divider(
         //  height: 20,
         thickness: 3,
-        color: Color(0xffB7935F),
+        color: theme.dividerTheme.color,
       ),
       Expanded(
         child: ListView.builder(
@@ -290,18 +295,18 @@ class quranScreen extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  Quranview.routeName,
-                  arguments: Suradata(
+                  QuranDetailsview.routeName,
+                  arguments: SuraData(
                       suraname: suranamelist[index],
-                      suranumber: AyaNumberlist[index]),
+                      suranumber: (index + 1).toString()),
                 );
               },
               child: suratitlewidget(
-                data: Suradata(
+                data: SuraData(
                     suraname: suranamelist[index],
-                    suranumber: AyaNumberlist[index]),
+                    suranumber: (index + 1).toString()),
                 suraname: suranamelist[index],
-                suranumber: AyaNumberlist[index],
+                suranumber: (index + 1).toString(),
               ),
             );
           },
@@ -310,4 +315,11 @@ class quranScreen extends StatelessWidget {
       )
     ]);
   }
+}
+
+class SuraData {
+  final String suraname;
+  final String suranumber;
+
+  SuraData({required this.suraname, required this.suranumber});
 }

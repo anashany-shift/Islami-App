@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../setting_provider/setting_provider.dart';
 
 class BgWidget extends StatelessWidget {
   Widget child;
@@ -10,12 +13,16 @@ class BgWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<SettingProvider>(context);
+
     return Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('assets/images/bgapp.png'),
+          image: AssetImage(
+            provider.getBackgroundImage(),
+          ),
           fit: BoxFit.cover,
         )),
         child: child);

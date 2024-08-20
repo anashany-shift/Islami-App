@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:islami/modules/layout/layout_screen.dart';
+import 'package:provider/provider.dart';
+
+import '../../../core/setting_provider/setting_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = 'Splash';
@@ -24,6 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset("assets/images/splash.png");
+    var provider = Provider.of<SettingProvider>(context);
+
+    return Image.asset(provider.getSplashBackgroundImage());
   }
 }
