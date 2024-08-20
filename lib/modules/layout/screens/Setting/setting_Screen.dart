@@ -49,14 +49,14 @@ class _settingScreenState extends State<settingScreen> {
             },
             decoration: CustomDropdownDecoration(
               closedFillColor:
-                  provider.isDark() ? Color(0xff141A2E) : Colors.white,
+                  provider.isDark() ? Color(0xff33416e) : Colors.white,
               closedSuffixIcon: Icon(
                 Icons.keyboard_arrow_down_rounded,
                 color:
                     provider.isDark() ? theme.primaryColorDark : Colors.black,
               ),
               expandedFillColor:
-                  provider.isDark() ? Color(0xff141A2E) : Colors.white,
+                  provider.isDark() ? Color(0xff33416e) : Colors.white,
               expandedSuffixIcon: Icon(
                 Icons.keyboard_arrow_up_rounded,
                 color:
@@ -91,14 +91,14 @@ class _settingScreenState extends State<settingScreen> {
             },
             decoration: CustomDropdownDecoration(
               closedFillColor:
-                  provider.isDark() ? Color(0xff141A2E) : Colors.white,
+                  provider.isDark() ? Color(0xff33416e) : Colors.white,
               closedSuffixIcon: Icon(
                 Icons.keyboard_arrow_down_rounded,
                 color:
                     provider.isDark() ? theme.primaryColorDark : Colors.black,
               ),
               expandedFillColor:
-                  provider.isDark() ? Color(0xff141A2E) : Colors.white,
+                  provider.isDark() ? Color(0xff33416e) : Colors.white,
               expandedSuffixIcon: Icon(
                 Icons.keyboard_arrow_up_rounded,
                 color:

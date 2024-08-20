@@ -1,4 +1,79 @@
+// // import 'package:flutter/material.dart';
+// // import 'package:islami/modules/layout/screens/Setting/setting_Screen.dart';
+// // import 'package:islami/modules/layout/screens/hadeth/hadeth_Screen.dart';
+// // import 'package:islami/modules/layout/screens/quran/quran_Screen.dart';
+// // import 'package:islami/modules/layout/screens/radio/redio_Screen.dart';
+// // import 'package:islami/modules/layout/screens/sebha/sebha_screen.dart';
+// //
+// // import '../../core/widgets/bg_widget.dart';
+// //
+// // class LayoutScreen extends StatefulWidget {
+// //   static const String routeName = 'Layout';
+// //
+// //   LayoutScreen({super.key});
+// //
+// //   @override
+// //   State<LayoutScreen> createState() => _LayoutScreenState();
+// // }
+// //
+// // class _LayoutScreenState extends State<LayoutScreen> {
+// //   int selctedindex = 0;
+// //
+// //   List<Widget> screens = [
+// //     quranScreen(),
+// //     hadethSreen(),
+// //     sebhaScreen(),
+// //     radioScreen(),
+// //     settingScreen(),
+// //   ];
+// //   List<String> title = [
+// //     'islami',
+// //     'hadeth',
+// //     'sebha',
+// //     'radio',
+// //     'Setting',
+// //   ];
+// //
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     return BgWidget(
+// //       child: Scaffold(
+// //         backgroundColor: Colors.transparent,
+// //         appBar: AppBar(
+// //           title: Text(title[selctedindex]),
+// //         ),
+// //         bottomNavigationBar: BottomNavigationBar(
+// //           onTap: (value) {
+// //             selctedindex = value;
+// //             setState(() {});
+// //           },
+// //           currentIndex: selctedindex,
+// //           items: const [
+// //             BottomNavigationBarItem(
+// //                 icon: ImageIcon(AssetImage('assets/icons/moshaf_gold.png')),
+// //                 label: 'quran'),
+// //             BottomNavigationBarItem(
+// //                 icon: ImageIcon(
+// //                     AssetImage('assets/icons/quran-quran-svgrepo-com.png')),
+// //                 label: 'hadeth'),
+// //             BottomNavigationBarItem(
+// //                 icon: ImageIcon(AssetImage('assets/icons/sebha_blue.png')),
+// //                 label: 'sebha'),
+// //             BottomNavigationBarItem(
+// //                 icon: ImageIcon(AssetImage('assets/icons/radio_blue.png')),
+// //                 label: 'radio'),
+// //             BottomNavigationBarItem(
+// //                 icon: Icon(Icons.settings), label: 'Setting'),
+// //           ],
+// //         ),
+// //         body: screens[selctedindex],
+// //       ),
+// //     );
+// //   }
+// // }
+//
 // import 'package:flutter/material.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // import 'package:islami/modules/layout/screens/Setting/setting_Screen.dart';
 // import 'package:islami/modules/layout/screens/hadeth/hadeth_Screen.dart';
 // import 'package:islami/modules/layout/screens/quran/quran_Screen.dart';
@@ -17,7 +92,8 @@
 // }
 //
 // class _LayoutScreenState extends State<LayoutScreen> {
-//   int selctedindex = 0;
+//   int selectedIndex = 0;
+//   PageController _pageController = PageController();
 //
 //   List<Widget> screens = [
 //     quranScreen(),
@@ -26,9 +102,10 @@
 //     radioScreen(),
 //     settingScreen(),
 //   ];
-//   List<String> title = [
-//     'islami',
-//     'hadeth',
+//
+//   List<String> titles = [
+//     'quran',
+//     'hadith',
 //     'sebha',
 //     'radio',
 //     'Setting',
@@ -36,39 +113,60 @@
 //
 //   @override
 //   Widget build(BuildContext context) {
+//     // var provider=Provider.of<SettingProvider>(context);
+//     var lang = AppLocalizations.of(context)!;
 //     return BgWidget(
 //       child: Scaffold(
 //         backgroundColor: Colors.transparent,
 //         appBar: AppBar(
-//           title: Text(title[selctedindex]),
+//           title: Text(titles[selectedIndex]),
 //         ),
 //         bottomNavigationBar: BottomNavigationBar(
 //           onTap: (value) {
-//             selctedindex = value;
+//             selectedIndex = value;
+//             _pageController.animateToPage(
+//               selectedIndex,
+//               duration: Duration(milliseconds: 300),
+//               curve: Curves.easeInOutSine,
+//             );
 //             setState(() {});
 //           },
-//           currentIndex: selctedindex,
-//           items: const [
+//           currentIndex: selectedIndex,
+//           items: [
 //             BottomNavigationBarItem(
 //                 icon: ImageIcon(AssetImage('assets/icons/moshaf_gold.png')),
-//                 label: 'quran'),
+//                 label: lang.quran),
 //             BottomNavigationBarItem(
 //                 icon: ImageIcon(
 //                     AssetImage('assets/icons/quran-quran-svgrepo-com.png')),
-//                 label: 'hadeth'),
+//                 label: lang.hadith),
 //             BottomNavigationBarItem(
 //                 icon: ImageIcon(AssetImage('assets/icons/sebha_blue.png')),
-//                 label: 'sebha'),
+//                 label: lang.sebha),
 //             BottomNavigationBarItem(
 //                 icon: ImageIcon(AssetImage('assets/icons/radio_blue.png')),
-//                 label: 'radio'),
+//                 label: lang.radio),
 //             BottomNavigationBarItem(
-//                 icon: Icon(Icons.settings), label: 'Setting'),
+//                 icon: Icon(Icons.settings), label: lang.setting),
 //           ],
 //         ),
-//         body: screens[selctedindex],
+//         body: PageView(
+//           controller: _pageController,
+//           onPageChanged: (index) {
+//             setState(() {
+//               selectedIndex = index;
+//             });
+//           },
+//           children: screens,
+//         ),
 //       ),
 //     );
+//   }
+//
+//   @override
+//   void dispose() {
+//     _pageController.dispose();
+//     super.dispose();
 //   }
 // }
 
@@ -79,7 +177,9 @@ import 'package:islami/modules/layout/screens/hadeth/hadeth_Screen.dart';
 import 'package:islami/modules/layout/screens/quran/quran_Screen.dart';
 import 'package:islami/modules/layout/screens/radio/redio_Screen.dart';
 import 'package:islami/modules/layout/screens/sebha/sebha_screen.dart';
+import 'package:provider/provider.dart';
 
+import '../../core/setting_provider/setting_provider.dart';
 import '../../core/widgets/bg_widget.dart';
 
 class LayoutScreen extends StatefulWidget {
@@ -95,31 +195,46 @@ class _LayoutScreenState extends State<LayoutScreen> {
   int selectedIndex = 0;
   PageController _pageController = PageController();
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   List<Widget> screens = [
     quranScreen(),
     hadethSreen(),
     sebhaScreen(),
     radioScreen(),
-    settingScreen(),
   ];
 
-  List<String> titles = [
-    'quran',
-    'hadith',
-    'sebha',
-    'radio',
-    'Setting',
-  ];
 
   @override
   Widget build(BuildContext context) {
-    // var provider=Provider.of<SettingProvider>(context);
+    var provider = Provider.of<SettingProvider>(context);
+
     var lang = AppLocalizations.of(context)!;
+    List<String> titles = [
+      lang.quran,
+      lang.hadith,
+      lang.sebha,
+      lang.radio,
+    ];
     return BgWidget(
       child: Scaffold(
+        key: _scaffoldKey,
+        // Use GlobalKey to access the scaffold
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(titles[selectedIndex]),
+          leading: IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              _scaffoldKey.currentState
+                  ?.openDrawer(); // Open the drawer using the GlobalKey
+            },
+          ),
+        ),
+        drawer: Drawer(
+          backgroundColor:
+              provider.isDark() ? Color(0xff141A2E) : Color(0xffB7935F),
+          child: settingScreen(), // Add the Settings Screen as Drawer content
         ),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (value) {
@@ -146,8 +261,6 @@ class _LayoutScreenState extends State<LayoutScreen> {
             BottomNavigationBarItem(
                 icon: ImageIcon(AssetImage('assets/icons/radio_blue.png')),
                 label: lang.radio),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: lang.setting),
           ],
         ),
         body: PageView(
@@ -169,3 +282,4 @@ class _LayoutScreenState extends State<LayoutScreen> {
     super.dispose();
   }
 }
+
